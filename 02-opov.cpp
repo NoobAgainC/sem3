@@ -31,8 +31,7 @@ int main() {
     a.getCordinates();
     cout << "Enter Co-ordinates for point B:" << endl;
     b.getCordinates();
-    a = a + b;
     cout << "Sum of Co-ordinates of point A and B:" << endl;
-    a.printCordinates();
+    (a + b).printCordinates();
     return 0;
 }
