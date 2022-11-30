@@ -1,27 +1,40 @@
-#include <iostream>
+#include <iostream.h>
+#include <string.h>
+
+#define MAX_NAME 28
 
 using namespace std;
 
 class Animal{
-	char name[10];
+protected:
+	char name[MAX_NAME];
+public:
+    void getname(const char *s) {
+        strcpy(name, s);
+    }
 };
+	
 	
 class Dog: public Animal {
 public:
 	void voice() {
-		cout << name << "Barks.";
+		cout << name << "Barks." << endl;
 	}
 };
 
 class Lion: public Animal {
 public:
 	void voice() {
-		cout << name << "Roars."
+		cout << name << "Roars." << endl;
 	}
 };
 
 int main() {
-	Dog Lucy("Lucy");
-	Lion King("King");
+	Dog Lucy;
+	Lion King;
+	Lucy.getname("Lucy");
+	King.getname("King");
+	Lucy.voice();
+	King.voice();
 	return 0;
 }
