@@ -37,7 +37,7 @@ bool Queue :: push(int n) {
 
 bool Queue :: pop() {
     if (isEmpty()) return false;
-    for (int i = 0; i < size; ++i ) arr[i] = arr[i + 1];
+    for (int i = 0; i < size-1; ++i ) arr[i] = arr[i + 1];
     size--;
     cout << "Popped from the Queue" << endl;
     return true;

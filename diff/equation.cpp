@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <ctype.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -11,10 +12,16 @@ public:
     void input();
     void output();
     void assign();
+    string removeSpaces(string str)
+    {
+        str.erase(remove(str.begin(), str.end(), ' '), str.end());
+        return str;
+    }
 };
 
 void Equation::input() {
     getline(cin, eq);
+    eq = removeSpaces(eq);
 }
 
 void Equation::output() {
@@ -23,21 +30,14 @@ void Equation::output() {
 
 void Equation::assign() {
     string num;
-    int co = 0, po;
+    int ptr = 0, co = 0, po;
     for (int i = 0; i < eq.length(); i++) {
-        if (isdigit(eq[i])) num += eq[i];
-        else {
-            if (co != 0) {
-                if (num.length() != 0) co = stoi(num);
-                else co = 1;
-            }
-            else if (eq[i] == 'x'){
-                if (num.length() != 0) po = stoi(num);
-                else po = 1;
-            }
-            else po = 0;
-            num.clear();
+        if (eq[i] == 'x') {
+            num = eq.substr(ptr, i-ptr);
+            co = stoi(num);
+            if(eq[i+1] != '^') po = 1;
         }
+
         
     }
 }
