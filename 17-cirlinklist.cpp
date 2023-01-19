@@ -13,35 +13,50 @@ public:
     }
 };
 
-class LinkList {
+class CirLinkList {
     Node *head = nullptr;
 public:
-    ~LinkList() {
+    ~CirLinkList() {
         while (deleteNode());
     }
     void insertNode(int n) {
-        Node *a = new Node(n, head);
+        Node *a = new Node(n);
+        if (!head) {
+            head = a;
+            a->next = a;
+            return;
+        }
+        Node *ptr = head;
+        while (ptr->next != head) ptr = ptr->next;
+        ptr->next = a;
+        a->next = head;
         head = a;
     }
     bool deleteNode() {
         if (head == nullptr) return false;
-        Node * tmp = head;
-        head = tmp->next;
+        if (head->next == head) {
+            delete head;
+            head = nullptr;
+            return true;
+        }
+        Node * tmp = head, * ptr = head;
+        while (ptr->next != head) ptr = ptr->next;
+        ptr->next = head = head->next;
         delete tmp;
         return true;
-        
     }
     void print() {
         Node* ptr = head;
-        while (ptr != nullptr) {
+        while (ptr->next != head) {
             cout << ptr->val << endl;
             ptr = ptr -> next;
         }
+        cout << ptr->val << endl;
     }
 };
 
 int main() {
-    LinkList a;
+    CirLinkList a;
     a.insertNode(3);
     a.insertNode(4);
     a.deleteNode();
